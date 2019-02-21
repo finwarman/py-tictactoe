@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import os  # os for 'clear' terminal command.
+import numpy as np
 
 
 def clear():  # set correct clear command for the current OS
@@ -53,6 +54,12 @@ def isValidMove(move, board):
     return move
 
 
+def checkDraw(board):
+    if not checkWin and (board != '-').all():
+        return True
+    return False
+
+
 def makeMove(board, piece):
     move = False
     while move is False:
@@ -69,6 +76,8 @@ def makeMove(board, piece):
 
 gameWon = False
 while not gameWon:
+    if(checkDraw(board)):
+        print("\n *+*+*+*\n Nobody Won :(\n *+*+*+*\n")
     makeMove(board, pieces[currentPlayer])
     if checkWin(board):
         clear()
